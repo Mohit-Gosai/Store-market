@@ -17,48 +17,25 @@ import MerchantDashboard from './Routes/MerchantDashboard.jsx'
 import TrendingDeals from './Routes/TrendingDeals.jsx'
 import SavedStores from './Routes/SavedStores.jsx'
 
+// Change this section in main.jsx
 const route = createHashRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      {
-        path:'',
-        element:<Home/>
-      },
-      {
-        path:'store/:id',
-        element:<StoreDetails/>
-      },
-      {
-        path: 'onboarding',
-        element: <StoreOnboarding/>
-      },
-      {
-        path:"create-coupon",
-        element:<CreateCoupon/>
-      },
-      {
-        path: 'my-coupons',
-        element: <CouponWallet/>
-      },
-      {
-        path: 'merchant-dashboard',
-        element: <MerchantDashboard/>
-      },
-      {
-        path: 'deals',
-        element: <TrendingDeals/>
-      },
-      {
-        path:'saved',
-        element: <SavedStores/>
-      }
-
-    ],
-    baseName: '/Store-market' // Ensure this matches the "homepage" field in package.json
+      { path: '', element: <Home /> },
+      { path: 'store/:id', element: <StoreDetails /> },
+      { path: 'onboarding', element: <StoreOnboarding /> },
+      { path: "create-coupon", element: <CreateCoupon /> },
+      { path: 'my-coupons', element: <CouponWallet /> },
+      { path: 'merchant-dashboard', element: <MerchantDashboard /> },
+      { path: 'deals', element: <TrendingDeals /> },
+      { path: 'saved', element: <SavedStores /> }
+    ]
   }
-])
+], {
+  basename: "/Store-market" // Move basename here, outside the routes array
+});
 
 
 createRoot(document.getElementById('root')).render(

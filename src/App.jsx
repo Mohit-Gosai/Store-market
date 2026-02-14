@@ -4,7 +4,7 @@ import Sidebar from './Components/Sidebar'
 import { Outlet } from 'react-router-dom'
 import Footer from './Components/Footer'
 import { Col, Container, Row, Offcanvas } from 'react-bootstrap'
-import { STORES } from './Data/MockData';
+import { STORES } from './Data/MockData'
 
 export default function App() {
   const [role, setRole] = useState('user');
