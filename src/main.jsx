@@ -34,9 +34,7 @@ const route = createHashRouter([
       { path: 'saved', element: <SavedStores /> }
     ]
   }
-], {
-  basename: "/Store-market/" // Move this HERE, as the second argument
-});
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
