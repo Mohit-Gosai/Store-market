@@ -55,15 +55,14 @@ const route = createHashRouter([
         element: <SavedStores/>
       }
 
-    ]
+    ],
+    baseName: '/Store-market' // Ensure this matches the "homepage" field in package.json
   }
 ])
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    
       <RouterProvider router={route} />
-    
   </StrictMode>,
 )
