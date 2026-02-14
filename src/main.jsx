@@ -18,6 +18,7 @@ import TrendingDeals from './Routes/TrendingDeals.jsx'
 import SavedStores from './Routes/SavedStores.jsx'
 
 // Change this section in main.jsx
+// Updated main.jsx
 const route = createHashRouter([
   {
     path: '/',
@@ -34,9 +35,8 @@ const route = createHashRouter([
     ]
   }
 ], {
-  basename: "/Store-market" // Move basename here, outside the routes array
+  basename: "/Store-market/" // Move this HERE, as the second argument
 });
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
