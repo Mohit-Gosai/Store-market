@@ -1,15 +1,12 @@
-/* Smooth transitions for the sidebar and its elements */
 .transition-all {
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.3s ease-in-out;
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+/* Optional: Make the scrollbar cleaner for the dark sidebar */
+::-webkit-scrollbar {
+  width: 5px;
 }
-
-/* Ensure icons are always visible and centered when collapsed */
-.bi {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
 }

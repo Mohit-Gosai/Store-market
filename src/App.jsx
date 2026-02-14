@@ -11,38 +11,47 @@ export default function App() {
   const [filteredStores, setFilteredStores] = useState(STORES);
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // State to control mobile sidebar visibility
-  const [showMobileSidebar, setShowMobileSidebar] = useState(false);
-  const handleClose = () => setShowMobileSidebar(false);
-  const handleShow = () => setShowMobileSidebar(true);
+  // State for Desktop Collapse
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  // State for Mobile Drawer
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const handleMobileClose = () => setShowMobileMenu(false);
+  const handleMobileShow = () => setShowMobileMenu(true);
 
   return (
     <>
-      {/* Pass handleShow to Navbar */}
-      <Navbar role={role} setRole={setRole} onShowSidebar={handleShow} />
+      <Navbar role={role} setRole={setRole} onShowSidebar={handleMobileShow} />
       
       <Container fluid className="p-0">
-        <Row className="g-0">
-          {/* Desktop Sidebar: Visible only on md and larger */}
-          <Col md={2} className="bg-dark border-end border-secondary d-none d-md-block" style={{ minHeight: '100vh' }}>
-            <Sidebar role={role} />
+        <Row className="g-0 flex-nowrap">
+          {/* DESKTOP SIDEBAR: Dynamic width based on isCollapsed */}
+          <Col 
+            xs="auto" 
+            className="bg-dark border-end border-secondary d-none d-md-block transition-all"
+            style={{ width: isCollapsed ? '80px' : '240px', transition: '0.3s' }}
+          >
+            <Sidebar 
+              role={role} 
+              isCollapsed={isCollapsed} 
+              setIsCollapsed={setIsCollapsed} 
+            />
           </Col>
 
-          {/* Mobile Sidebar: Offcanvas (drawer) that slides in */}
-          <Offcanvas show={showMobileSidebar} onHide={handleClose} className="bg-dark text-white w-75">
+          {/* MOBILE SIDEBAR: Always full labels, slides in */}
+          <Offcanvas show={showMobileMenu} onHide={handleMobileClose} className="bg-dark text-white">
             <Offcanvas.Header closeButton closeVariant="white">
               <Offcanvas.Title className="text-primary fw-bold">Menu</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body className="p-0">
-              {/* Reuse Sidebar component - onClick to close menu after selecting */}
-              <div onClick={handleClose}>
+              <div onClick={handleMobileClose}>
                 <Sidebar role={role} />
               </div>
             </Offcanvas.Body>
           </Offcanvas>
 
-          {/* Main Content: Full width on mobile, 10-cols on desktop */}
-          <Col xs={12} md={10} className="p-3 p-md-4" style={{ minHeight: '90vh' }}>
+          {/* MAIN CONTENT */}
+          <Col className="p-3 p-md-4 overflow-auto" style={{ minHeight: '90vh' }}>
             <Outlet context={{ role, filteredStores, activeCategory, setFilteredStores, setActiveCategory }} />
           </Col>
         </Row>
