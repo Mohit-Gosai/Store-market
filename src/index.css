@@ -1,0 +1,15 @@
+/* Smooth transitions for the sidebar and its elements */
+.transition-all {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure icons are always visible and centered when collapsed */
+.bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
