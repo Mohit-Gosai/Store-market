@@ -3,7 +3,7 @@ import { Carousel, Button, Badge } from 'react-bootstrap';
 
 export default function MyCarousel() {
     const slides = [
-        { title: "Welcome to Store Market", text: "Your bridge to the best local shopping experiences.", img: "../assets/Store-market", badge: "Official Launch" },
+        { title: "Welcome to Store Market", text: "Your bridge to the best local shopping experiences.", img: "../assets/Store-arket.jpg", badge: "Official Launch" },
         { title: "Empowering Local Business", text: "Support neighborhood shops and grow together with exclusive digital coupons.", img: "../assets/local-business", color: "text-warning" },
         { title: "Today's Mega Offers", text: "Flash sales are live! Get up to 50% off on your favorite electronics and fashion.", img: "../assets/salesOffer", button: true },
         { title: "What's New In Your Area?", text: "Discover over 10+ newly registered stores in your local sector this week.", img: "../assets/newArea" },
