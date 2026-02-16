@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carousel, Button, Badge } from 'react-bootstrap';
-import '../assets/'
+
 export default function MyCarousel() {
     const slides = [
         { title: "Welcome to Store Market", text: "Your bridge to the best local shopping experiences.", img: "../assets/Store-Market.jpg", badge: "Official Launch" },
