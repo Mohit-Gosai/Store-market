@@ -88,7 +88,12 @@ export default function StoreDetails() {
                             <Card className="shadow-sm border-0 overflow-hidden mb-4">
                                 <img src={store.image} alt="store" style={{ height: '300px', objectFit: 'cover' }} />
                                 <Card.Body>
+                                    <div>
                                     <h5>About the Store</h5>
+                                    <Button variant="outline-secondary" size="sm" className="ms-2" onClick={() => alert('Store description updated!')}>
+                                        <i className="bi bi-save"></i>
+                                    </Button>
+                                    </div>
                                     <p className="text-muted">{store.description}</p>
                                 </Card.Body>
                             </Card>
