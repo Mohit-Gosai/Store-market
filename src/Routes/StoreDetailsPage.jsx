@@ -50,6 +50,27 @@ export default function StoreDetails() {
         setShowModal(true);
     };
 
+    const handleSave = () => {
+        const savedData = {
+            id: store.id,
+            name: store.name,
+            description: store.description,
+            location: store.location,
+            image: store.image,
+            timestamp: new Date().toLocaleString()
+        };
+
+        const existingSaves = JSON.parse(localStorage.getItem('savedStores')) || [];
+        const isAlreadySaved = existingSaves.some(item => item.id === store.id);    
+        if (isAlreadySaved) {
+            alert("You've already saved this store!");
+            return;
+        }
+        const updatedSaves = [savedData, ...existingSaves];
+        localStorage.setItem('savedStores', JSON.stringify(updatedSaves));
+        alert("Store details saved to your profile!");
+    }
+
     // Chart Data
     const chartData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -90,7 +111,7 @@ export default function StoreDetails() {
                                 <Card.Body>
                                     <div>
                                     <h5>About the Store</h5>
-                                    <Button variant="outline-secondary" size="sm" className="ms-2" onClick={() => alert('Store description updated!')}>
+                                    <Button variant="outline-secondary" size="sm" className="ms-2" onClick={handleSave}>
                                         <i className="bi bi-save"></i>
                                     </Button>
                                     </div>
