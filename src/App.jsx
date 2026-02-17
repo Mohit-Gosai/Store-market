@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from './Components/Navbar'
 import Sidebar from './Components/Sidebar'
 import { Outlet } from 'react-router-dom'
@@ -18,6 +18,18 @@ export default function App() {
 
   const handleMobileClose = () => setShowMobileMenu(false);
   const handleMobileShow = () => setShowMobileMenu(true);
+
+  useEffect(() => {
+    if (activeCategory === "All") {
+      setFilteredStores(allStores);
+    } else {
+      setFilteredStores(allStores.filter(s => s.category === activeCategory));
+    }
+  }, [allStores, activeCategory]);
+
+  const addStore = (newStore) => {
+    setAllStores(prev => [newStore, ...prev]); // Add new store to the top
+  };
 
   return (
     <>
@@ -52,7 +64,7 @@ export default function App() {
 
           {/* MAIN CONTENT */}
           <Col className="p-3 p-md-4 overflow-auto" style={{ minHeight: '90vh' }}>
-            <Outlet context={{ role, filteredStores, activeCategory, setFilteredStores, setActiveCategory }} />
+            <Outlet context={{ role, filteredStores, activeCategory, setFilteredStores, setActiveCategory, addStore }} />
           </Col>
         </Row>
       </Container>
