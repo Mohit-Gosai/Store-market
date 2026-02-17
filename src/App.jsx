@@ -21,9 +21,9 @@ export default function App() {
 
   useEffect(() => {
     if (activeCategory === "All") {
-      setFilteredStores(allStores);
+      setFilteredStores(filteredStores);
     } else {
-      setFilteredStores(allStores.filter(s => s.category === activeCategory));
+      setFilteredStores(filteredStores.filter(s => s.category === activeCategory));
     }
   }, [filteredStores, activeCategory]);
 
