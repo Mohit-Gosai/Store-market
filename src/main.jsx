@@ -10,7 +10,7 @@ import { createHashRouter, RouterProvider } from 'react-router-dom'
 
 import Home from './Routes/Home.jsx'
 import StoreOnboarding from './Components/StoreOnboarding.jsx'
-import CreateCoupon from './Routes/CreateCoupon.jsx'
+import ListYourStore from './Routes/ListYourStore.jsx'
 import CouponWallet from './Routes/CouponWallet.jsx'
 import StoreDetails from './Routes/StoreDetailsPage.jsx'
 import MerchantDashboard from './Routes/MerchantDashboard.jsx'
@@ -27,7 +27,7 @@ const route = createHashRouter([
       { path: '', element: <Home /> },
       { path: 'store/:id', element: <StoreDetails /> },
       { path: 'onboarding', element: <StoreOnboarding /> },
-      { path: "create-coupon", element: <CreateCoupon /> },
+      { path: "create-coupon", element: <ListYourStore /> },
       { path: 'my-coupons', element: <CouponWallet /> },
       { path: 'merchant-dashboard', element: <MerchantDashboard /> },
       { path: 'deals', element: <TrendingDeals /> },
