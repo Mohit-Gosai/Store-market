@@ -25,7 +25,7 @@ export default function App() {
     } else {
       setFilteredStores(allStores.filter(s => s.category === activeCategory));
     }
-  }, [allStores, activeCategory]);
+  }, [filteredStores, activeCategory]);
 
   const addStore = (newStore) => {
     setAllStores(prev => [newStore, ...prev]); // Add new store to the top
