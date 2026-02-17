@@ -16,6 +16,7 @@ export default function StoreDetails() {
     const { role } = useOutletContext();
     const { id } = useParams();
     const navigate = useNavigate();
+    const [isSaved, setIsSaved] = useState(false);
 
     // 1. All State Hooks (Must be at the top)
     const [userRating, setUserRating] = useState(0);
@@ -50,26 +51,24 @@ export default function StoreDetails() {
         setShowModal(true);
     };
 
-    const handleSave = () => {
-        const savedData = {
-            id: store.id,
-            name: store.name,
-            description: store.description,
-            location: store.location,
-            image: store.image,
-            timestamp: new Date().toLocaleString()
-        };
 
-        const existingSaves = JSON.parse(localStorage.getItem('savedStores')) || [];
-        const isAlreadySaved = existingSaves.some(item => item.id === store.id);    
-        if (isAlreadySaved) {
-            alert("You've already saved this store!");
-            return;
+    // Check if store is already saved on load
+    React.useEffect(() => {
+        const saved = JSON.parse(localStorage.getItem('savedStores')) || [];
+        setIsSaved(saved.includes(Number(id)));
+    }, [id]);
+
+    const toggleSave = () => {
+        let saved = JSON.parse(localStorage.getItem('savedStores')) || [];
+        if (saved.includes(Number(id))) {
+            saved = saved.filter(storeId => storeId !== Number(id));
+            setIsSaved(false);
+        } else {
+            saved.push(Number(id));
+            setIsSaved(true);
         }
-        const updatedSaves = [savedData, ...existingSaves];
-        localStorage.setItem('savedStores', JSON.stringify(updatedSaves));
-        alert("Store details saved to your profile!");
-    }
+        localStorage.setItem('savedStores', JSON.stringify(saved));
+    };
 
     // Chart Data
     const chartData = {
@@ -108,15 +107,24 @@ export default function StoreDetails() {
                         <>
                             <Card className="shadow-sm border-0 overflow-hidden mb-4">
                                 <img src={store.image} alt="store" style={{ height: '300px', objectFit: 'cover' }} />
-                                <Card.Body>
+
+                                <div className="d-flex justify-content-between align-items-start mb-4">
                                     <div>
-                                    <h5>About the Store</h5>
-                                    <Button variant="outline-secondary" size="sm" className="ms-2" onClick={handleSave}>
-                                        <i className="bi bi-save"></i>
-                                    </Button>
+                                        <Badge bg="primary" className="mb-2">{store.category}</Badge>
+                                        <h1 className="fw-bold display-5">{store.name}</h1>
+                                        <p className="text-muted fs-5"><i className="bi bi-geo-alt me-2"></i>{store.location}</p>
                                     </div>
-                                    <p className="text-muted">{store.description}</p>
-                                </Card.Body>
+
+                                    {/* NEW SAVE BUTTON */}
+                                    <Button
+                                        variant={isSaved ? "danger" : "outline-danger"}
+                                        className="rounded-pill px-4 shadow-sm"
+                                        onClick={toggleSave}
+                                    >
+                                        <i className={`bi ${isSaved ? 'bi-heart-fill' : 'bi-heart'} me-2`}></i>
+                                        {isSaved ? "Saved" : "Save Store"}
+                                    </Button>
+                                </div>
                             </Card>
 
                             <Card className="shadow-sm border-0 p-4 bg-light border-start border-warning border-4">
@@ -130,39 +138,39 @@ export default function StoreDetails() {
                                 )}
                             </Card>
                             {/* Location Section */}
-                    <Card className="shadow-sm border-0 mt-4 overflow-hidden">
-                        <Card.Header className="bg-white py-3">
-                            <h5 className="mb-0 fw-bold">
-                                <i className="bi bi-geo-alt-fill text-danger me-2"></i>
-                                Store Location
-                            </h5>
-                        </Card.Header>
-                        <div style={{ width: '100%', height: '350px' }}>
-                            <iframe
-                                title="institute-location"
-                                width="100%"
-                                height="100%"
-                                frameBorder="0"
-                                style={{ border: 0 }}
-                                /* REPLACE 'Your+Institute+Name+City' with your actual institute name below */
-                                // src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Your+Institute+Name,City"
-                                /* If you don't have an API key, use this search-based version: */
-                                src="https://maps.google.com/maps?q=Avish+Educom+Durg&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                        <Card.Body className="bg-light">
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <p className="small mb-1"><strong>Area:</strong> {store.location}</p>
-                                    <p className="small text-muted mb-0">Visit us at our main branch for verification.</p>
+                            <Card className="shadow-sm border-0 mt-4 overflow-hidden">
+                                <Card.Header className="bg-white py-3">
+                                    <h5 className="mb-0 fw-bold">
+                                        <i className="bi bi-geo-alt-fill text-danger me-2"></i>
+                                        Store Location
+                                    </h5>
+                                </Card.Header>
+                                <div style={{ width: '100%', height: '350px' }}>
+                                    <iframe
+                                        title="institute-location"
+                                        width="100%"
+                                        height="100%"
+                                        frameBorder="0"
+                                        style={{ border: 0 }}
+                                        /* REPLACE 'Your+Institute+Name+City' with your actual institute name below */
+                                        // src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Your+Institute+Name,City"
+                                        /* If you don't have an API key, use this search-based version: */
+                                        src="https://maps.google.com/maps?q=Avish+Educom+Durg&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                        allowFullScreen
+                                    ></iframe>
                                 </div>
-                                <Button variant="outline-primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=Avish+Educom+Durg`, '_blank')}>
-                                    Open in Maps
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
+                                <Card.Body className="bg-light">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p className="small mb-1"><strong>Area:</strong> {store.location}</p>
+                                            <p className="small text-muted mb-0">Visit us at our main branch for verification.</p>
+                                        </div>
+                                        <Button variant="outline-primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=Avish+Educom+Durg`, '_blank')}>
+                                            Open in Maps
+                                        </Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
                         </>
                     )}
                 </Col>
@@ -191,7 +199,7 @@ export default function StoreDetails() {
                             <p className="small text-muted mt-3">Valid for 30 days after purchase</p>
                         </Card.Body>
                     </Card>
-                    
+
                 </Col>
             </Row>
 
