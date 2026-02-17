@@ -108,7 +108,7 @@ export default function StoreDetails() {
                             <Card className="shadow-sm border-0 overflow-hidden mb-4">
                                 <img src={store.image} alt="store" style={{ height: '300px', objectFit: 'cover' }} />
 
-                                <div className="d-flex justify-content-between align-items-start mb-4">
+                                <div className="d-flex justify-content-between align-items-start mb-4 p-2">
                                     <div>
                                         <Badge bg="primary" className="mb-2">{store.category}</Badge>
                                         <h1 className="fw-bold display-5">{store.name}</h1>
