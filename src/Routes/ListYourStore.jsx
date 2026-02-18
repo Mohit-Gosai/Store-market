@@ -28,7 +28,7 @@ export default function ListYourStore() {
 
         addStore(newStore);
         alert("Store Listed Successfully!");
-        navigate('/'); // Redirect to Home to see the new store
+        navigate(''); // Redirect to Home to see the new store
     };
 
     return (

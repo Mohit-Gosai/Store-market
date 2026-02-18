@@ -9,7 +9,6 @@ import { STORES } from './Data/MockData';
 export default function App() {
   const [role, setRole] = useState('user');
   const [filteredStores, setFilteredStores] = useState(STORES);
-  const [allStores, setAllStores] = useState(STORES);
   const [activeCategory, setActiveCategory] = useState("All");
 
   // State for Desktop Collapse
@@ -22,14 +21,14 @@ export default function App() {
 
   useEffect(() => {
     if (activeCategory === "All") {
-      setFilteredStores(allStores);
+      setFilteredStores(filteredStores);
     } else {
-      setFilteredStores(allStores.filter(s => s.category === activeCategory));
+      setFilteredStores(filteredStores.filter(s => s.category === activeCategory));
     }
-  }, [allStores, activeCategory]);
+  }, [filteredStores, activeCategory]);
 
   const addStore = (newStore) => {
-    setAllStores(prev => [newStore, ...prev]); // Add new store to the top
+    setFilteredStores(prev => [newStore, ...prev]); // Add new store to the top
   };
 
   return (
