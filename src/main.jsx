@@ -27,7 +27,7 @@ const route = createHashRouter([
       { path: '', element: <Home /> },
       { path: 'store/:id', element: <StoreDetails /> },
       { path: 'onboarding', element: <StoreOnboarding /> },
-      { path: "create-coupon", element: <ListYourStore /> },
+      { path: "onboarding", element: <ListYourStore /> },
       { path: 'my-coupons', element: <CouponWallet /> },
       { path: 'merchant-dashboard', element: <MerchantDashboard /> },
       { path: 'deals', element: <TrendingDeals /> },

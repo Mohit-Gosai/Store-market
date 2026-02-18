@@ -46,7 +46,7 @@ const Sidebar = ({ role, isCollapsed, setIsCollapsed }) => {
           { path: '/', icon: 'bi-house', label: 'Home' },
           { path: '/saved', icon: 'bi-heart', label: 'Saved', role: 'user' },
           { path: '/my-coupons', icon: 'bi-ticket', label: 'Wallet', role: 'user' },
-          { path: '/create-coupon', icon: 'bi-plus-circle', label: 'Create', role: 'owner' },
+          { path: '/onboarding', icon: 'bi-plus-circle', label: 'Setup My Store', role: 'owner' },
           { path: '/merchant-dashboard', icon: 'bi-graph-up', label: 'Stats', role: 'owner' }
         ].filter(link => !link.role || link.role === role).map((item) => (
           <li key={item.path} className="nav-item">
