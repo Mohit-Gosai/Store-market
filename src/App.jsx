@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Container, Row, Col, Offcanvas } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
-import Navbar from './Components/Navbar';
-import Sidebar from './Components/Sidebar';
-import Footer from './Components/Footer';
-import { STORES } from './data/stores'; 
-
+import React, { useState, useEffect } from 'react'
+import Navbar from './Components/Navbar'
+import Sidebar from './Components/Sidebar'
+import { Outlet } from 'react-router-dom'
+import Footer from './Components/Footer'
+import { Col, Container, Row, Offcanvas } from 'react-bootstrap'
+import { STORES } from './Data/MockData';
 
 export default function App() {
   const [role, setRole] = useState('user');
