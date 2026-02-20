@@ -9,11 +9,11 @@ import { STORES } from './Data/MockData';
 export default function App() {
   const [role, setRole] = useState('user');
   
-  // 1. Keep a master list of ALL stores
-  const [masterStores, setMasterStores] = useState(STORES);
+  // 1. THIS IS YOUR DATABASE: It holds everything including new stores
+  const [allStores, setAllStores] = useState(STORES); 
   
-  // 2. Keep a separate state for what is currently visible
-  const [displayStores, setDisplayStores] = useState(STORES);
+  // 2. THIS IS YOUR VIEW: What the user actually sees
+  const [filteredStores, setFilteredStores] = useState(STORES);
   const [activeCategory, setActiveCategory] = useState("All");
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -22,19 +22,19 @@ export default function App() {
   const handleMobileClose = () => setShowMobileMenu(false);
   const handleMobileShow = () => setShowMobileMenu(true);
 
-  // 3. Logic: Whenever the master list or category changes, update the display
+  // 3. EFFECT: Whenever the Database OR Category changes, update the View
   useEffect(() => {
     if (activeCategory === "All") {
-      setDisplayStores(masterStores);
+      setFilteredStores(allStores);
     } else {
-      const filtered = masterStores.filter(s => s.category === activeCategory);
-      setDisplayStores(filtered);
+      const result = allStores.filter(s => s.category === activeCategory);
+      setFilteredStores(result);
     }
-  }, [masterStores, activeCategory]);
+  }, [allStores, activeCategory]); // Re-run when a store is added or category clicked
 
-  // 4. Function to add to the master list
+  // 4. ADD FUNCTION: Updates the Database
   const addStore = (newStore) => {
-    setMasterStores(prev => [newStore, ...prev]);
+    setAllStores(prev => [newStore, ...prev]); 
   };
 
   return (
