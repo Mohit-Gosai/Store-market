@@ -17,19 +17,19 @@ export default function ListYourStore() {
     });
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        const newStore = {
-            ...formData,
-            id: Date.now(), // Unique ID
-            rating: 5.0,    // New stores start with 5 stars
-            reviews: 0
-        };
-
-        addStore(newStore);
-        alert("Store Listed Successfully!");
-        navigate(''); // Redirect to Home to see the new store
+    e.preventDefault();
+    
+    const newStore = {
+        ...formData,
+        id: Date.now(), 
+        rating: 5.0,    
+        reviews: 0
     };
+
+    addStore(newStore);
+    alert("Store Listed Successfully!");
+    navigate('/'); // Simply use '/'
+};
 
     return (
         <Card className="shadow border-0 p-4 rounded-4">
