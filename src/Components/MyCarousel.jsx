@@ -1,13 +1,18 @@
 import React from 'react'
 import { Carousel, Button, Badge } from 'react-bootstrap';
+import localBusiness from '../assets/local-business.png';
+import salesOffer from '../assets/salesOffer.jpg';
+import newArea from '../assets/newArea.jpg';
+import newEvents from '../assets/newEvents.jpg';
+import storeMarket from '../assets/Store-Market.jpg';
 
 export default function MyCarousel() {
     const slides = [
-        { title: "Welcome to Store Market", text: "Your bridge to the best local shopping experiences.", img: "../assets/Store-Market.jpg", badge: "Official Launch" },
-        { title: "Empowering Local Business", text: "Support neighborhood shops and grow together with exclusive digital coupons.", img: "../assets/local-business.png", color: "text-warning" },
-        { title: "Today's Mega Offers", text: "Flash sales are live! Get up to 50% off on your favorite electronics and fashion.", img: "../assets/salesOffer.jpg", button: true },
-        { title: "What's New In Your Area?", text: "Discover over 10+ newly registered stores in your local sector this week.", img: "../assets/newArea.jpg" },
-        { title: "Upcoming Events & Deals", text: "Join the Weekend Flea Market. Best deals guaranteed by local vendors!", img: "../assets/newEvents.jpg", color: "text-info" }
+        { title: "Welcome to Store Market", text: "Your bridge to the best local shopping experiences.", img: storeMarket, badge: "Official Launch" },
+        { title: "Empowering Local Business", text: "Support neighborhood shops and grow together with exclusive digital coupons.", img: localBusiness, color: "text-warning" },
+        { title: "Today's Mega Offers", text: "Flash sales are live! Get up to 50% off on your favorite electronics and fashion.", img: salesOffer, button: true },
+        { title: "What's New In Your Area?", text: "Discover over 10+ newly registered stores in your local sector this week.", img: newArea },
+        { title: "Upcoming Events & Deals", text: "Join the Weekend Flea Market. Best deals guaranteed by local vendors!", img: newEvents, color: "text-info" }
     ];
 
     return (
