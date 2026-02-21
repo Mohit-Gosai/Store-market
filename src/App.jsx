@@ -9,6 +9,11 @@ import { STORES } from './Data/MockData';
 export default function App() {
 const [role, setRole] = useState('user');
   
+handleMobileClose = () => setShowMobileMenu(false);
+handleMobileShow = () => setShowMobileMenu(true);
+const [showMobileMenu, setShowMobileMenu] = useState(false);
+const [isCollapsed, setIsCollapsed] = useState(false);
+
   // 1. DATABASE: Load from localStorage if it exists, otherwise use STORES
   const [allStores, setAllStores] = useState(() => {
     const saved = localStorage.getItem('my_market_stores');
