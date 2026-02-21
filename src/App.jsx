@@ -9,10 +9,10 @@ import { STORES } from './Data/MockData';
 export default function App() {
   const [role, setRole] = useState('user');
   
-  // 1. THIS IS YOUR DATABASE: It holds everything including new stores
+  // 1. Master list (Database)
   const [allStores, setAllStores] = useState(STORES); 
   
-  // 2. THIS IS YOUR VIEW: What the user actually sees
+  // 2. View list (What is displayed)
   const [filteredStores, setFilteredStores] = useState(STORES);
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -22,7 +22,7 @@ export default function App() {
   const handleMobileClose = () => setShowMobileMenu(false);
   const handleMobileShow = () => setShowMobileMenu(true);
 
-  // 3. EFFECT: Whenever the Database OR Category changes, update the View
+  // 3. Logic: Update filteredStores whenever allStores or category changes
   useEffect(() => {
     if (activeCategory === "All") {
       setFilteredStores(allStores);
@@ -30,9 +30,8 @@ export default function App() {
       const result = allStores.filter(s => s.category === activeCategory);
       setFilteredStores(result);
     }
-  }, [allStores, activeCategory]); // Re-run when a store is added or category clicked
+  }, [allStores, activeCategory]);
 
-  // 4. ADD FUNCTION: Updates the Database
   const addStore = (newStore) => {
     setAllStores(prev => [newStore, ...prev]); 
   };
@@ -60,12 +59,12 @@ export default function App() {
           </Offcanvas>
 
           <Col className="p-3 p-md-4 overflow-auto" style={{ minHeight: '90vh' }}>
-            {/* Pass displayStores to the Home page */}
+            {/* FIXED: Using 'filteredStores' instead of 'displayStores' */}
             <Outlet context={{ 
                role, 
-               filteredStores: displayStores, 
+               filteredStores: filteredStores, 
                activeCategory, 
-               setFilteredStores: setDisplayStores, 
+               setFilteredStores, 
                setActiveCategory, 
                addStore 
             }} />
