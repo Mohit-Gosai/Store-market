@@ -8,41 +8,41 @@ import { STORES } from './Data/MockData';
 
 export default function App() {
 const [role, setRole] = useState('user');
-  
+
+// 1. DATABASE: Load from localStorage if it exists, otherwise use STORES
+const [allStores, setAllStores] = useState(() => {
+  const saved = localStorage.getItem('my_market_stores');
+  return saved ? JSON.parse(saved) : STORES;
+}); 
+
+const [filteredStores, setFilteredStores] = useState(allStores);
+const [activeCategory, setActiveCategory] = useState("All");
+
+// ... (Keep your Sidebar/Offcanvas logic)
+
+// 2. Logic: Update view when database or category changes
+useEffect(() => {
+  if (activeCategory === "All") {
+    setFilteredStores(allStores);
+  } else {
+    const result = allStores.filter(s => s.category === activeCategory);
+    setFilteredStores(result);
+  }
+  // 3. PERSIST: Save the master list whenever it changes
+  localStorage.setItem('my_market_stores', JSON.stringify(allStores));
+}, [allStores, activeCategory]);
+
+const addStore = (newStore) => {
+  setAllStores(prev => [newStore, ...prev]); 
+};
+
+
 handleMobileClose = () => setShowMobileMenu(false);
 handleMobileShow = () => setShowMobileMenu(true);
 const [showMobileMenu, setShowMobileMenu] = useState(false);
 const [isCollapsed, setIsCollapsed] = useState(false);
-
-  // 1. DATABASE: Load from localStorage if it exists, otherwise use STORES
-  const [allStores, setAllStores] = useState(() => {
-    const saved = localStorage.getItem('my_market_stores');
-    return saved ? JSON.parse(saved) : STORES;
-  }); 
-  
-  const [filteredStores, setFilteredStores] = useState(allStores);
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  // ... (Keep your Sidebar/Offcanvas logic)
-
-  // 2. Logic: Update view when database or category changes
-  useEffect(() => {
-    if (activeCategory === "All") {
-      setFilteredStores(allStores);
-    } else {
-      const result = allStores.filter(s => s.category === activeCategory);
-      setFilteredStores(result);
-    }
-    // 3. PERSIST: Save the master list whenever it changes
-    localStorage.setItem('my_market_stores', JSON.stringify(allStores));
-  }, [allStores, activeCategory]);
-
-  const addStore = (newStore) => {
-    setAllStores(prev => [newStore, ...prev]); 
-  };
-
-  return (
-    <>
+return (
+  <>
       <Navbar role={role} setRole={setRole} onShowSidebar={handleMobileShow} />
       <Container fluid className="p-0">
         <Row className="g-0 flex-nowrap">
