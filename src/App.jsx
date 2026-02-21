@@ -7,22 +7,20 @@ import { Col, Container, Row, Offcanvas } from 'react-bootstrap'
 import { STORES } from './Data/MockData';
 
 export default function App() {
-  const [role, setRole] = useState('user');
+const [role, setRole] = useState('user');
   
-  // 1. Master list (Database)
-  const [allStores, setAllStores] = useState(STORES); 
+  // 1. DATABASE: Load from localStorage if it exists, otherwise use STORES
+  const [allStores, setAllStores] = useState(() => {
+    const saved = localStorage.getItem('my_market_stores');
+    return saved ? JSON.parse(saved) : STORES;
+  }); 
   
-  // 2. View list (What is displayed)
-  const [filteredStores, setFilteredStores] = useState(STORES);
+  const [filteredStores, setFilteredStores] = useState(allStores);
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  // ... (Keep your Sidebar/Offcanvas logic)
 
-  const handleMobileClose = () => setShowMobileMenu(false);
-  const handleMobileShow = () => setShowMobileMenu(true);
-
-  // 3. Logic: Update filteredStores whenever allStores or category changes
+  // 2. Logic: Update view when database or category changes
   useEffect(() => {
     if (activeCategory === "All") {
       setFilteredStores(allStores);
@@ -30,6 +28,8 @@ export default function App() {
       const result = allStores.filter(s => s.category === activeCategory);
       setFilteredStores(result);
     }
+    // 3. PERSIST: Save the master list whenever it changes
+    localStorage.setItem('my_market_stores', JSON.stringify(allStores));
   }, [allStores, activeCategory]);
 
   const addStore = (newStore) => {

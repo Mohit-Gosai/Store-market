@@ -26,10 +26,13 @@ export default function ListYourStore() {
         };
 
         addStore(newStore);
-
-        // Simple alert and navigate
         alert("Store Listed Successfully!");
-        navigate('/'); // React Router handles the # automatically
+        
+        // Use a slight timeout to ensure state has processed before moving
+        setTimeout(() => {
+            navigate('/'); 
+        }, 100);
+    
     };
     return (
         <Card className="shadow border-0 p-4 rounded-4">
