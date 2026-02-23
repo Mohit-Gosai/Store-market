@@ -9,7 +9,7 @@ export default function Home() {
     const { filteredStores, activeCategory } = useOutletContext();
 
     return (
-        <div className="container-fluid px-0 bg-denger">
+        <div className="container-fluid px-0">
             <div className="mb-4">
                 <MyCarousel /> 
             </div>
