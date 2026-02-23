@@ -6,34 +6,37 @@ export default function ListYourStore() {
     const { addStore } = useOutletContext();
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        name: '',
-        owner: '',
-        category: 'Electronics',
-        location: '',
-        description: '',
-        image: 'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?w=800', // Default
-        deal: ''
-    });
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // ListYourStore.jsx
 
-        const newStore = {
-            ...formData,
-            id: Date.now(),
-            rating: 5.0,
-            reviews: 0
-        };
+const [formData, setFormData] = useState({
+    name: '',
+    owner: '',
+    category: 'Electronics',
+    location: '',
+    description: '',
+    image: 'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?w=800', 
+    discount: '' // Change 'deal' to 'discount'
+});
 
-        addStore(newStore);
-        alert("Store Listed Successfully!");
-        
-        // Use a slight timeout to ensure state has processed before moving
-        setTimeout(() => {
-            navigate('/'); 
-        }, 100);
-    
+const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newStore = {
+        ...formData,
+        id: Date.now(),
+        rating: 5.0,
+        reviews: 0,
+        // Ensure every key expected by StoreCard exists
+        trending: false 
     };
+
+    addStore(newStore);
+    alert("Store Listed Successfully!");
+    
+    setTimeout(() => {
+        navigate('/'); 
+    }, 100);
+};
     return (
         <Card className="shadow border-0 p-4 rounded-4">
             <div className="mb-4">

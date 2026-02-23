@@ -25,9 +25,15 @@ export default function App() {
   const handleMobileClose = () => setShowMobileMenu(false);
   const handleMobileShow = () => setShowMobileMenu(true);
 
-  const addStore = (newStore) => {
+  // App.jsx
+
+const addStore = (newStore) => {
+    // 1. Add to the master database
     setAllStores(prev => [newStore, ...prev]); 
-  };
+    
+    // 2. Force the view to 'All' so the new store isn't hidden by a filter
+    setActiveCategory("All"); 
+};
 
   // --- 3. EFFECTS ---
   useEffect(() => {
