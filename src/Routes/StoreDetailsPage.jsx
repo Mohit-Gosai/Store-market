@@ -52,7 +52,7 @@ export default function StoreDetails({ store }) {
     React.useEffect(() => {
         const saved = JSON.parse(localStorage.getItem('savedStores')) || [];
         setIsSaved(saved.includes(Number(id)));
-    }, [id]);
+    }, [store.id]);
 
     const toggleSave = () => {
         let saved = JSON.parse(localStorage.getItem('savedStores')) || [];
@@ -166,15 +166,11 @@ export default function StoreDetails({ store }) {
                                 <span className="fs-4 fw-bold text-success">₹49</span>
                             </div>
 
-                            {role === 'user' ? (
+                            
                                 <Button variant="primary" onClick={handlePurchase} size="lg" className="w-100 shadow">
                                     Buy Coupon Now
                                 </Button>
-                            ) : (
-                                <div className="alert alert-info py-2 small">
-                                    Owners view: This is how customers see your offer.
-                                </div>
-                            )}
+                            
                             <p className="small text-muted mt-3">Valid for 30 days after purchase</p>
                         </Card.Body>
                     </Card>
