@@ -30,7 +30,7 @@ const handleSubmit = (e) => {
         // Ensure every key expected by StoreCard exists
         trending: false 
     };
-    
+
     STORES.unshift(newStore); // Add to mock database
     addStore(newStore);
     alert("Store Listed Successfully!");
@@ -77,8 +77,14 @@ const handleSubmit = (e) => {
                             <Form.Select onChange={(e) => setFormData({ ...formData, category: e.target.value })}>
                                 <option>Electronics</option>
                                 <option>Fashion</option>
-                                <option>Food</option>
+                                <option>Bakery</option>
                                 <option>Groceries</option>
+                                <option>Sports</option>
+                                <option>Pets</option>
+                                <option>Decor</option>
+                                <option>Cafe</option>
+                                <option>Music</option>
+                                <option>Books</option>
                             </Form.Select>
                         </Form.Group>
                     </Col>
