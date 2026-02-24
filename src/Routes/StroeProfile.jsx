@@ -3,19 +3,27 @@ import { Container, Row, Col, Card, Button, Form, Image } from 'react-bootstrap'
 
 
 export default function StoreProfile({ store }) {
-    const [postContent, setPostContent] = useState("");
+    // 1. Destructure setAllStores from context
+const { setAllStores } = useOutletContext(); 
 
-    const handlePost = (e) => {
-        e.preventDefault();
-        const newPost = {
-            id: Date.now(),
-            content: postContent,
-            likes: 0,
-            timestamp: "Just now"
-        };
-        // Logic to update allStores state with the new post
-        setPostContent("");
+const handlePost = (e) => {
+    e.preventDefault();
+    const newPost = {
+        id: Date.now(),
+        content: postContent,
+        likes: 0,
+        timestamp: "Just now"
     };
+
+    // 2. Use store.id to target the correct store in the master list
+    setAllStores(prevStores => prevStores.map(s => 
+        s.id === store.id 
+        ? { ...s, posts: [newPost, ...(s.posts || [])] } 
+        : s
+    ));
+
+    setPostContent("");
+};
 
     return (
         <Container className="py-4">

@@ -55,17 +55,19 @@ export default function StoreDetails({ store }) {
     }, [store.id]);
 
     const toggleSave = () => {
-        let saved = JSON.parse(localStorage.getItem('savedStores')) || [];
-        if (saved.includes(Number(store.id))) {
-            saved = saved.filter(storeId => storeId !== Number(store.id));
-            setIsSaved(false);
-        } else {
-            saved.push(Number(store.id));
-            setIsSaved(true);
-        }
+    // OLD: const saved = JSON.parse(localStorage.getItem('savedStores')) || [];
+    // NEW: Use store.id from props
+    const saved = JSON.parse(localStorage.getItem('savedStores')) || [];
+    if (saved.includes(store.id)) {
+        const newSaved = saved.filter(sId => sId !== store.id);
+        localStorage.setItem('savedStores', JSON.stringify(newSaved));
+        setIsSaved(false);
+    } else {
+        saved.push(store.id);
         localStorage.setItem('savedStores', JSON.stringify(saved));
-    };
-
+        setIsSaved(true);
+    }
+};
     // Chart Data
     
     if (!store) return <div className="p-5 text-center">Store not found!</div>;
