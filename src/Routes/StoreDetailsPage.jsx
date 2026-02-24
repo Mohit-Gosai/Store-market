@@ -2,19 +2,15 @@ import React, { useState } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import { Row, Col, Card, Button, Badge, Modal } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
-import {
-    Chart as ChartJS, CategoryScale, LinearScale,
-    PointElement, LineElement, Title, Tooltip, Legend
-} from 'chart.js';
+
 import { STORES } from '../Data/MockData';
 import StarRating from '../Components/StarRating';
 
 // Register ChartJS components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export default function StoreDetails() {
+export default function StoreDetails({ store }) {
     const { role } = useOutletContext();
-    const { id } = useParams();
+    
     const navigate = useNavigate();
     const [isSaved, setIsSaved] = useState(false);
 
@@ -23,7 +19,7 @@ export default function StoreDetails() {
     const [showModal, setShowModal] = useState(false);
 
     // 2. Data Fetching
-    const store = STORES.find(item => item.id == id);
+    
 
     // 3. Logic Functions
     const handleRatingSubmit = (rating) => {
@@ -71,17 +67,7 @@ export default function StoreDetails() {
     };
 
     // Chart Data
-    const chartData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        datasets: [{
-            label: 'Coupon Sales (₹)',
-            data: [1200, 1900, 1500, 2500, 2200, 3000],
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.3,
-            fill: true
-        }]
-    };
-
+    
     if (!store) return <div className="p-5 text-center">Store not found!</div>;
 
     return (
@@ -91,19 +77,12 @@ export default function StoreDetails() {
                 <div>
                     <Badge bg="primary" className="mb-2">Verified Store</Badge>
                     <h1 className="fw-bold">{store.name}</h1>
-                    <p className="text-muted mb-0"><i className="bi bi-geo-alt"></i> Sector 17, Chandigarh</p>
+                    <p className="text-muted mb-0"><i className="bi bi-geo-alt"></i> {store.name}</p>
                 </div>
-                {role === 'owner' && <Button variant="outline-dark">Edit Profile</Button>}
             </div>
 
             <Row>
                 <Col lg={8}>
-                    {role === 'owner' ? (
-                        <Card className="shadow-sm border-0 p-4 mb-4">
-                            <h5 className="fw-bold mb-4">Sales Analytics</h5>
-                            <Line data={chartData} options={{ responsive: true }} />
-                        </Card>
-                    ) : (
                         <>
                             <Card className="shadow-sm border-0 overflow-hidden mb-4">
                                 <img src={store.image} alt="store" style={{ height: '300px', objectFit: 'cover' }} />
@@ -172,7 +151,7 @@ export default function StoreDetails() {
                                 </Card.Body>
                             </Card>
                         </>
-                    )}
+                
                 </Col>
 
                 <Col lg={4}>
