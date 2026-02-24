@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Card, Row, Col } from 'react-bootstrap';
 import { useOutletContext, useNavigate } from 'react-router-dom';
+import { STORES } from '../Data/MockData';
 
 export default function ListYourStore() {
     const { addStore } = useOutletContext();
@@ -29,7 +30,8 @@ const handleSubmit = (e) => {
         // Ensure every key expected by StoreCard exists
         trending: false 
     };
-
+    
+    STORES.unshift(newStore); // Add to mock database
     addStore(newStore);
     alert("Store Listed Successfully!");
     
