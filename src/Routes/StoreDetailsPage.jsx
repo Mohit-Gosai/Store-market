@@ -51,16 +51,16 @@ export default function StoreDetails({ store }) {
     // Check if store is already saved on load
     React.useEffect(() => {
         const saved = JSON.parse(localStorage.getItem('savedStores')) || [];
-        setIsSaved(saved.includes(Number(id)));
+        setIsSaved(saved.includes(Number(store.id)));
     }, [store.id]);
 
     const toggleSave = () => {
         let saved = JSON.parse(localStorage.getItem('savedStores')) || [];
-        if (saved.includes(Number(id))) {
-            saved = saved.filter(storeId => storeId !== Number(id));
+        if (saved.includes(Number(store.id))) {
+            saved = saved.filter(storeId => storeId !== Number(store.id));
             setIsSaved(false);
         } else {
-            saved.push(Number(id));
+            saved.push(Number(store.id));
             setIsSaved(true);
         }
         localStorage.setItem('savedStores', JSON.stringify(saved));
