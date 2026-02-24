@@ -6,7 +6,7 @@ export default function ListYourStore() {
     const { addStore } = useOutletContext();
     const navigate = useNavigate();
 
-    // ListYourStore.jsx
+     // ListYourStore.jsx
 
 const [formData, setFormData] = useState({
     name: '',

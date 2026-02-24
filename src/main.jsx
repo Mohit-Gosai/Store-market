@@ -9,7 +9,6 @@ import { createHashRouter, RouterProvider } from 'react-router-dom'
 
 
 import Home from './Routes/Home.jsx'
-import StoreOnboarding from './Components/StoreOnboarding.jsx'
 import ListYourStore from './Routes/ListYourStore.jsx'
 import CouponWallet from './Routes/CouponWallet.jsx'
 import StoreDetails from './Routes/StoreDetailsPage.jsx'
@@ -26,7 +25,6 @@ const route = createHashRouter([
     children: [
       { path: '', element: <Home /> },
       { path: 'store/:id', element: <StoreDetails /> },
-      { path: 'onboarding', element: <StoreOnboarding /> },
       { path: "onboarding", element: <ListYourStore /> },
       { path: 'my-coupons', element: <CouponWallet /> },
       { path: 'merchant-dashboard', element: <MerchantDashboard /> },
@@ -38,6 +36,6 @@ const route = createHashRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <RouterProvider router={route} />
+    <RouterProvider router={route} />
   </StrictMode>,
 )

@@ -17,7 +17,7 @@ export default function App() {
   const [allStores, setAllStores] = useState(() => {
     const saved = localStorage.getItem('my_market_stores');
     return saved ? JSON.parse(saved) : STORES;
-  }); 
+  });
 
   const [filteredStores, setFilteredStores] = useState(allStores);
 
@@ -27,13 +27,13 @@ export default function App() {
 
   // App.jsx
 
-const addStore = (newStore) => {
+  const addStore = (newStore) => {
     // 1. Add to the master database
-    setAllStores(prev => [newStore, ...prev]); 
-    
+    setAllStores(prev => [newStore, ...prev]);
+
     // 2. Force the view to 'All' so the new store isn't hidden by a filter
-    setActiveCategory("All"); 
-};
+    setActiveCategory("All");
+  };
 
   // --- 3. EFFECTS ---
   useEffect(() => {
@@ -55,8 +55,8 @@ const addStore = (newStore) => {
       <Container fluid className="p-0">
         <Row className="g-0 flex-nowrap">
           {/* Desktop Sidebar */}
-          <Col 
-            xs="auto" 
+          <Col
+            xs="auto"
             className="bg-dark border-end border-secondary d-none d-md-block transition-all"
             style={{ width: isCollapsed ? '80px' : '240px', transition: '0.3s', minHeight: '100vh' }}
           >
@@ -75,13 +75,13 @@ const addStore = (newStore) => {
 
           {/* Main Feed Content */}
           <Col className="p-3 p-md-4 overflow-auto" style={{ minHeight: '90vh' }}>
-            <Outlet context={{ 
-               role, 
-               filteredStores, 
-               activeCategory, 
-               setFilteredStores, 
-               setActiveCategory, 
-               addStore 
+            <Outlet context={{
+              role,
+              filteredStores,
+              activeCategory,
+              setFilteredStores,
+              setActiveCategory,
+              addStore
             }} />
           </Col>
         </Row>
