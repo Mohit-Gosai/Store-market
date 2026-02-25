@@ -8,6 +8,7 @@ export default function StoreProfileController() {
     const { role, allStores } = useOutletContext();
     
     // 1. Find the store data
+    console.log("All Stores:", allStores); // Debugging line to check the stores data
     const store = allStores.find(s => s.id === Number(id));
 
     if (!store) return <div className="p-5 text-center">Store not found</div>;

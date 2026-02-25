@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button, Form, Image } from 'react-bootstrap';
+import {useOutletContext} from 'react-router-dom'
 
 
 export default function StoreProfile({ store }) {
     // 1. Destructure setAllStores from context
 const { setAllStores } = useOutletContext(); 
+const [postContent, setPostContent] = useState("");
 
 const handlePost = (e) => {
     e.preventDefault();

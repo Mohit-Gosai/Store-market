@@ -16,6 +16,7 @@ import MerchantDashboard from './Routes/MerchantDashboard.jsx'
 import TrendingDeals from './Routes/TrendingDeals.jsx'
 import SavedStores from './Routes/SavedStores.jsx'
 import StoreProfile from './Routes/StroeProfile.jsx';
+import StoreProfileControl from './components/StoreProfileControl.jsx';
 // Change this section in main.jsx
 // Updated main.jsx
 const route = createHashRouter([
@@ -24,8 +25,7 @@ const route = createHashRouter([
     element: <App />,
     children: [
       { path: '', element: <Home /> },
-      { path: 'store/:id', element: <StoreDetails /> },
-      { path: 'store/:id', element: <StoreProfile /> },
+      { path: 'store/:id', element: <StoreProfileControl /> },
       { path: "onboarding", element: <ListYourStore /> },
       { path: 'my-coupons', element: <CouponWallet /> },
       { path: 'merchant-dashboard', element: <MerchantDashboard /> },
