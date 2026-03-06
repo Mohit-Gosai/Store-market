@@ -11,11 +11,9 @@ import { createHashRouter, RouterProvider } from 'react-router-dom'
 import Home from './Routes/Home.jsx'
 import ListYourStore from './Routes/ListYourStore.jsx'
 import CouponWallet from './Routes/CouponWallet.jsx'
-import StoreDetails from './Routes/StoreDetailsPage.jsx'
 import MerchantDashboard from './Routes/MerchantDashboard.jsx'
 import TrendingDeals from './Routes/TrendingDeals.jsx'
 import SavedStores from './Routes/SavedStores.jsx'
-import StoreProfile from './Routes/StroeProfile.jsx';
 import StoreProfileControl from './components/StoreProfileControl.jsx';
 // Change this section in main.jsx
 // Updated main.jsx

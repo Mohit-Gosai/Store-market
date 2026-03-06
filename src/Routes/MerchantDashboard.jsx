@@ -2,7 +2,27 @@ import React, { useState } from 'react';
 import { Row, Col, Card, Button, Form, Table, Badge, ProgressBar, InputGroup } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 import CouponScanner from '../Components/CouponScanner';
-
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    Filler // Since you have "fill: true" in your data
+} from 'chart.js';
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    Filler
+);
 export default function MerchantDashboard() {
     // 1. Initial Data (Mocking your database)
     const [coupons, setCoupons] = useState([
